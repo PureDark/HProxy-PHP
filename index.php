@@ -6,7 +6,6 @@
 	$headers = get_all_headers();
 	if(isset($headers["Origin-Url"])&&!empty($headers["Origin-Url"])){
 		$originUrl = urldecode($headers["Origin-Url"]);
-		echo "<!--$originUrl-->\r\n";
 		$referer = (isset($headers["Referer"]))?$headers["Referer"]:"";
 		$cookie = (isset($headers["Cookie"]))?$headers["Cookie"]:"";
 		echo $steal->getCode($originUrl, $referer, $cookie);
@@ -14,7 +13,6 @@
 		foreach($headers as $key => $value) { 
 			echo "<!--$key => $value-->\r\n";
 		} 
-		
 	}
 	
 	function get_all_headers() { 
