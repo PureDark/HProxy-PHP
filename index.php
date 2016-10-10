@@ -12,7 +12,7 @@
 		echo $steal->getCode($originUrl, $referer, $cookie);
 	}else{
 		foreach($headers as $key => $value) { 
-			echo "<!--$key => %value-->\r\n";
+			echo "<!--$key => $value-->\r\n";
 		} 
 		
 	}
