@@ -2,7 +2,7 @@
 HProxy powered by PHP
 
 # 使用教程
-1.先将这个 repo Fork到自己的帐号里  
+1.登录Github，先将这个 repo Fork到自己的帐号里（右上角）
 
 2.打开[heroku](https://www.heroku.com/)， 点击[注册(Sign Up)](https://signup.heroku.com/)，注册一个帐号   
 
