@@ -42,7 +42,7 @@
         foreach($headers as $key => $value){
             $headerStr .= $key.":".$value."\r\n";
         }
-        $opts = array('http' => array('header' => $headerStr, 'timeout' => $this->timeout), );
+        $opts = array('http' => array('header' => $headerStr, 'timeout' => 30), );
         $context = stream_context_create($opts);
         $code = file_get_contents($url, false, $context);
 		return $code;
