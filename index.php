@@ -9,14 +9,16 @@
                 continue;
             $headerArray[] = $key.":".$value;
         }
-        $ch = curl_init($url);
-        print_r($headerArray);
+        $ch = curl_init($originUrl);
+        //print_r($headerArray);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POST, $post);
+        if($post)
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
         $response = curl_exec($ch);
         $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
         $responseHeaders = substr($response, 0, $headerSize);
