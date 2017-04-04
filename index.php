@@ -9,6 +9,7 @@
                 continue;
             $headerArray[] = $key.":".$value;
         }
+	    $collectuseragent = "KuaiYanKanShu Spider+(+http://www.kuaiyankanshu.net/about/spider.html)";
         $ch = curl_init($originUrl);
         //print_r($headerArray);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);
@@ -16,24 +17,30 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+		curl_setopt($ch, CURLOPT_USERAGENT, $collectuseragent);
         curl_setopt($ch, CURLOPT_POST, $post);
         if($post)
             curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
         $response = curl_exec($ch);
         $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
         $responseHeaders = substr($response, 0, $headerSize);
+        $html = substr($response, $headerSize);
         curl_close($ch);
         
+		//echo $responseHeaders;
         $headerArray =  explode("\r\n", $responseHeaders);
-        $charset = "none";
+        $matched = false;
+        $charset = "utf-8";
         foreach($headerArray as $header){
             if(preg_match('/charset.*?([\w-]+)/i', $header, $matches)){
                 $charset = $matches[1];
+                $matched = true;
             }
         }
-        $charset = ($charset != "none")?";charset=".$charset:"";
-	    header( "Content-Type:text/plain".$charset);  
-        $html = substr($response, $headerSize);
+        if(!$matched && preg_match('/charset.*?([\w-]+)/i', $html, $matches)){
+            $charset = $matches[1];
+        }
+	    header( "Content-Type:text/plain; charset=".$charset);
 		echo $html;
 	}else{
 	    header( "Content-Type:text/plain;charset=utf-8");  
