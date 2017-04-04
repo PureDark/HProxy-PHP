@@ -18,6 +18,7 @@
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
 		curl_setopt($ch, CURLOPT_USERAGENT, $collectuseragent);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
         curl_setopt($ch, CURLOPT_POST, $post);
         if($post)
             curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
